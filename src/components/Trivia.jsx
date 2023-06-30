@@ -68,7 +68,7 @@ const Trivia = () => {
             <div className="reviewpage">
                 <div className="gameover">
                     <h2>Game Over!</h2>
-                    <p>Your Final Score: {score}</p>
+                    <p>Your Final Score: {score} out of 6</p>
                     <h3>Questions Review:</h3>
                     <ul className="reviewList">
                         {questions.map((question, index) => (
