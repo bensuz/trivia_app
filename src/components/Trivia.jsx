@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const Trivia = () => {
     const [questions, setQuestions] = useState([]);
@@ -42,7 +43,18 @@ const Trivia = () => {
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
         } else {
-            setGameOver(true);
+            Swal.fire({
+                title: "Are you sure?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, finish game!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    setGameOver(true);
+                }
+            });
         }
     };
 
@@ -135,7 +147,9 @@ const Trivia = () => {
                 className="nextbutton"
                 // disabled={!userAnswers[currentQuestionIndex]}
             >
-                Next Question
+                {currentQuestionIndex === questions.length - 1
+                    ? "Finish Game"
+                    : "Next Question"}
             </button>
         </div>
     );
