@@ -81,11 +81,18 @@ const Trivia = () => {
                                     Your Answer:{""}
                                     {userAnswers[index].userAnswer}
                                 </p>
-                                {console.log({ userAnswers })}
-                                {userAnswers[index].isCorrect
-                                    ? "Correct"
-                                    : "Incorrect"}
-                                <p></p>
+                                <p
+                                    className={
+                                        userAnswers[index].isCorrect
+                                            ? "correct"
+                                            : "incorrect"
+                                    }
+                                >
+                                    {/* {console.log({ userAnswers })} */}
+                                    {userAnswers[index].isCorrect
+                                        ? "Correct"
+                                        : "Incorrect"}
+                                </p>
                             </li>
                         ))}
                     </ul>

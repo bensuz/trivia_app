@@ -168,3 +168,10 @@ body {
     margin-top: 25rem;
     font-size: 2rem;
 }
+
+.correct {
+    color: green;
+}
+.incorrect {
+    color: red;
+}
