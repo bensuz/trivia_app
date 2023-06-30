@@ -13,7 +13,7 @@ const Trivia = () => {
             .then((response) => response.json())
             .then((data) => {
                 setQuestions(data);
-                // console.log(data);
+                console.log(data);
             })
             .catch((error) => console.log(error));
     };
@@ -57,7 +57,7 @@ const Trivia = () => {
 
     if (questions.length === 0) {
         return (
-            <div>
+            <div className="loading">
                 <h2>Loading questions...</h2>
             </div>
         );
@@ -65,30 +65,34 @@ const Trivia = () => {
 
     if (gameOver) {
         return (
-            <div className="gameover">
-                <h2>Game Over!</h2>
-                <p>Your Final Score: {score}</p>
-                <h3>Questions Review:</h3>
-                <ul className="reviewList">
-                    {questions.map((question, index) => (
-                        <li key={index} className="review-li">
-                            <p>
-                                {index + 1} - {question.question}
-                            </p>
-                            <p>Correct Answer: {question.correctAnswer}</p>
-                            <p>
-                                Your Answer:{""}
-                                {userAnswers[index].userAnswer}
-                            </p>
-                            {console.log({ userAnswers })}
-                            {userAnswers[index].isCorrect
-                                ? "Correct"
-                                : "Incorrect"}
-                            <p></p>
-                        </li>
-                    ))}
-                </ul>
-                <button onClick={restartGame}>Restart Game</button>
+            <div className="reviewpage">
+                <div className="gameover">
+                    <h2>Game Over!</h2>
+                    <p>Your Final Score: {score}</p>
+                    <h3>Questions Review:</h3>
+                    <ul className="reviewList">
+                        {questions.map((question, index) => (
+                            <li key={index} className="review-li">
+                                <p>
+                                    {index + 1} - {question.question}
+                                </p>
+                                <p>Correct Answer: {question.correctAnswer}</p>
+                                <p>
+                                    Your Answer:{""}
+                                    {userAnswers[index].userAnswer}
+                                </p>
+                                {console.log({ userAnswers })}
+                                {userAnswers[index].isCorrect
+                                    ? "Correct"
+                                    : "Incorrect"}
+                                <p></p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <button onClick={restartGame} className="nextbutton">
+                    Restart Game
+                </button>
             </div>
         );
     }
@@ -121,6 +125,7 @@ const Trivia = () => {
             {/* <p>Score: {score}</p> */}
             <button
                 onClick={handleNextQuestion}
+                className="nextbutton"
                 // disabled={!userAnswers[currentQuestionIndex]}
             >
                 Next Question

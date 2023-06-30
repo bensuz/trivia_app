@@ -1,3 +1,9 @@
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,10 +11,10 @@
 }
 
 body {
-    background: url(./assets/confetti.jpg);
-    background-repeat: no-repeat;
+    background: url(./assets/New-blog-graphic.jpg);
+    background-repeat: repeat-y;
     background-size: cover;
-    height: 100vh;
+    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -22,12 +28,13 @@ body {
     gap: 2rem;
     align-items: center;
     justify-content: space-around;
+    margin-top: 5rem;
 }
 
 .trivia {
     background-color: #ffffffa0;
-    padding: 5rem;
-    border-radius: 5rem;
+    padding: 6rem;
+    border-radius: 5px 95px;
 }
 
 .heading {
@@ -39,15 +46,15 @@ body {
     font-weight: 600;
     background-color: rgb(255, 255, 255);
     color: #b336e4;
-    padding: 1rem;
-    border-radius: 1.5rem;
+    padding: 2rem;
+    border-radius: 3px 30px;
 }
 .question {
     width: 100%;
     background: linear-gradient(rgb(19, 244, 244), #cb32f5);
     text-align: center;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 3px 30px;
     border: 2px solid white;
     font-size: 26px;
 }
@@ -67,7 +74,7 @@ body {
     text-align: center;
     background: linear-gradient(rgb(19, 244, 244), #cb32f5);
     border: 1px solid white;
-    border-radius: 15px;
+    border-radius: 3px 30px;
     font-weight: 600;
     font-size: 24px;
     cursor: pointer;
@@ -75,10 +82,17 @@ body {
 
 .answer:hover,
 .answer.active {
-    background: rgb(107, 237, 14);
+    background: rgb(4, 250, 4);
     color: #b336e4;
 }
 
+.reviewpage {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
 .gameover {
     background-color: rgb(255, 255, 255);
     color: #b336e4;
@@ -90,6 +104,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
+    margin-top: 5rem;
 }
 .reviewList {
     list-style: none;
@@ -98,4 +113,58 @@ body {
 
 .review-li {
     margin-top: 1.5rem;
+}
+
+.nextbutton {
+    height: 2.5rem;
+    background-color: white;
+    color: #b336e4;
+    padding: 1rem;
+    border: 0.2rem solid white;
+    border-radius: 3px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    position: relative;
+    margin-bottom: 5rem;
+}
+
+.nextbutton:hover {
+    cursor: pointer;
+    background: rgb(107, 237, 14);
+    color: #b336e4;
+}
+
+.nextbutton::before,
+.nextbutton::after {
+    content: "";
+    position: absolute;
+    inset: -0.5rem;
+    background: conic-gradient(
+        from var(--gradient-angle),
+        #b336e4,
+        rgb(8, 238, 246)
+    );
+    animation: rotation 5s linear infinite;
+    border-radius: inherit;
+    z-index: -1;
+}
+
+.nextbutton::after {
+    filter: blur(3.5rem);
+}
+
+@keyframes rotation {
+    0% {
+        --gradient-angle: 0deg;
+    }
+    100% {
+        --gradient-angle: 360deg;
+    }
+}
+
+.loading {
+    margin-top: 25rem;
+    font-size: 2rem;
 }
