@@ -118,7 +118,7 @@ const Trivia = () => {
                     )}
                 </ul>
             </div>
-            <p>Score: {score}</p>
+            {/* <p>Score: {score}</p> */}
             <button
                 onClick={handleNextQuestion}
                 // disabled={!userAnswers[currentQuestionIndex]}
