@@ -243,4 +243,8 @@ body {
     .reviewList {
         margin-top: 0;
     }
+    .loading {
+        margin-top: 0;
+        font-size: 1rem;
+    }
 }
