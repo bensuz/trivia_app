@@ -36,6 +36,7 @@ const Trivia = () => {
                 ...userAnswers,
                 { isCorrect, userAnswer: selectedAnswer },
             ]);
+
             if (isCorrect) {
                 setScore((prevScore) => prevScore + 1);
             }
@@ -56,6 +57,7 @@ const Trivia = () => {
                 }
             });
         }
+        setSelectedAnswer("");
     };
 
     const restartGame = () => {
