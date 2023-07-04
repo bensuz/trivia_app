@@ -202,7 +202,7 @@ body {
         margin-top: 1rem;
         gap: 1rem;
         max-width: 80%;
-        background: contain;
+        /* background: contain; */
     }
     .trivia {
         margin-top: 0;
@@ -238,7 +238,7 @@ body {
         gap: 0.5rem;
         padding: 1.5rem;
         border-radius: 3rem;
-        margin-top: 30rem;
+        margin-top: 35rem;
     }
     .reviewList {
         margin-top: 0;
