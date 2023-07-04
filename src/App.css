@@ -14,7 +14,7 @@ body {
     background: url(./assets/New-blog-graphic.jpg);
     background-repeat: repeat-y;
     background-size: cover;
-    /* height: 100vh; */
+    height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -28,7 +28,7 @@ body {
     gap: 2rem;
     align-items: center;
     justify-content: space-around;
-    margin-top: 5rem;
+    margin-top: 2rem;
 }
 
 .loading {
@@ -40,20 +40,20 @@ body {
 }
 .trivia {
     background-color: #ffffffa0;
-    padding: 6rem;
+    padding: 4.2rem;
     border-radius: 5px 95px;
 }
 
 .heading {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin: 1rem;
 }
 .app p {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 600;
     background-color: rgb(255, 255, 255);
     color: #b336e4;
-    padding: 2rem;
+    padding: 1.8rem;
     border-radius: 3px 30px;
 }
 .question {
@@ -63,7 +63,7 @@ body {
     padding: 20px;
     border-radius: 3px 30px;
     border: 2px solid white;
-    font-size: 26px;
+    font-size: 1rem;
 }
 
 .answerContainer {
@@ -83,7 +83,7 @@ body {
     border: 1px solid white;
     border-radius: 3px 30px;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 1.3rem;
     cursor: pointer;
 }
 
@@ -111,7 +111,7 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
-    margin-top: 5rem;
+    margin-top: 20rem;
 }
 .reviewList {
     list-style: none;
@@ -137,7 +137,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     position: relative;
     margin-bottom: 5rem;
 }
@@ -194,4 +194,53 @@ body {
 
 .hide {
     display: none;
+}
+
+@media (max-width: 768px) {
+    .app {
+        margin: auto;
+        margin-top: 1rem;
+        gap: 1rem;
+        max-width: 80%;
+        background: contain;
+    }
+    .trivia {
+        margin-top: 0;
+        padding: 2rem;
+        border-radius: 15px;
+    }
+    .trivia p {
+        font-size: 1rem;
+        max-height: 200px;
+    }
+
+    .heading {
+        font-size: 2rem;
+    }
+
+    .answerContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .answer {
+        margin: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .nextbutton,
+    .prevbutton {
+        margin-bottom: 2rem;
+        font-size: 1rem;
+    }
+    .gameover {
+        width: 60%;
+        font-size: 1rem;
+        gap: 0.5rem;
+        padding: 1.5rem;
+        border-radius: 3rem;
+        margin-top: 16rem;
+    }
+    .reviewList {
+        margin-top: 0;
+    }
 }

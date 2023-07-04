@@ -6,7 +6,6 @@ const Trivia = () => {
     const [questions, setQuestions] = useState([]);
     const [userData, setUserData] = useState({});
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [userAnswers, setUserAnswers] = useState([]);
     const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -32,36 +31,28 @@ const Trivia = () => {
     };
 
     const handleNextQuestion = () => {
-        setSelectedAnswer(userData[currentQuestionIndex + 1]?.a);
-        const isCorrect =
-            selectedAnswer === questions[currentQuestionIndex].correctAnswer;
-        if (isCorrect) {
-            setScore((prevScore) => prevScore + 1);
-        }
-        // if (!userAnswers[currentQuestionIndex]) {
-        //     const isCorrect =
-        //         selectedAnswer ===
-        //         questions[currentQuestionIndex].correctAnswer;
-        //     setUserAnswers([
-        //         ...userAnswers,
-        //         { isCorrect, userAnswer: selectedAnswer },
-        //     ]);
-        //     // console.log(userAnswers);
-        //     if (isCorrect) {
-        //         setScore((prevScore) => prevScore + 1);
-        //     }
-        // }
-        // console.log("currqindex", currentQuestionIndex);
-        setUserData({
-            ...userData,
+        // setSelectedAnswer(userData[currentQuestionIndex + 1]?.a);
+        if (!userData[currentQuestionIndex]) {
+            const isCorrect =
+                selectedAnswer ===
+                questions[currentQuestionIndex].correctAnswer;
+            if (isCorrect) {
+                setScore((prevScore) => prevScore + 1);
+            }
 
-            [currentQuestionIndex]: {
-                question: questions[currentQuestionIndex].question,
-                a: selectedAnswer,
-                isCorrect: isCorrect,
-                correctAnswer: questions[currentQuestionIndex].correctAnswer,
-            },
-        });
+            setUserData({
+                ...userData,
+
+                [currentQuestionIndex]: {
+                    question: questions[currentQuestionIndex].question,
+                    a: selectedAnswer,
+                    isCorrect: isCorrect,
+                    correctAnswer:
+                        questions[currentQuestionIndex].correctAnswer,
+                },
+            });
+        }
+        setSelectedAnswer(userData[currentQuestionIndex + 1]?.a);
         // setSelectedAnswer("");
 
         if (currentQuestionIndex < questions.length - 1) {
@@ -99,7 +90,7 @@ const Trivia = () => {
         setQuestions([]);
         setUserData(null);
         setCurrentQuestionIndex(0);
-        setUserAnswers([]);
+
         setScore(0);
         setGameOver(false);
         fetchData();
