@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Trivia = () => {
     const [questions, setQuestions] = useState([]);
@@ -9,6 +10,8 @@ const Trivia = () => {
     const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [selectedAnswer, setSelectedAnswer] = useState(null);
+    let [loading, setLoading] = useState(true);
+    let [color, setColor] = useState("#ffffff");
 
     const fetchData = () => {
         fetch("https://wd40-trivia.onrender.com/api/questions")
@@ -106,6 +109,16 @@ const Trivia = () => {
         return (
             <div className="loading">
                 <h2>Loading questions...</h2>
+                <div className="sweet-loading">
+                    <ClipLoader
+                        color={color}
+                        loading={loading}
+                        // cssOverride={override}
+                        size={100}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                </div>
             </div>
         );
     }
