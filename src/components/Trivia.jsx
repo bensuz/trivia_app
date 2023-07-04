@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 
 const Trivia = () => {
     const [questions, setQuestions] = useState([]);
+    const [userData, setUserData] = useState({});
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userAnswers, setUserAnswers] = useState([]);
     const [score, setScore] = useState(0);
@@ -14,7 +15,7 @@ const Trivia = () => {
             .then((response) => response.json())
             .then((data) => {
                 setQuestions(data);
-                console.log(data);
+                // console.log(data);
             })
             .catch((error) => console.log(error));
     };
@@ -28,18 +29,38 @@ const Trivia = () => {
     };
 
     const handleNextQuestion = () => {
-        if (!userAnswers[currentQuestionIndex]) {
-            const isCorrect =
-                selectedAnswer ===
-                questions[currentQuestionIndex].correctAnswer;
-            setUserAnswers([
-                ...userAnswers,
-                { isCorrect, userAnswer: selectedAnswer },
-            ]);
-            if (isCorrect) {
-                setScore((prevScore) => prevScore + 1);
-            }
+        setSelectedAnswer(userData[currentQuestionIndex + 1]?.a);
+        const isCorrect =
+            selectedAnswer === questions[currentQuestionIndex].correctAnswer;
+        if (isCorrect) {
+            setScore((prevScore) => prevScore + 1);
         }
+        // if (!userAnswers[currentQuestionIndex]) {
+        //     const isCorrect =
+        //         selectedAnswer ===
+        //         questions[currentQuestionIndex].correctAnswer;
+        //     setUserAnswers([
+        //         ...userAnswers,
+        //         { isCorrect, userAnswer: selectedAnswer },
+        //     ]);
+        //     // console.log(userAnswers);
+        //     if (isCorrect) {
+        //         setScore((prevScore) => prevScore + 1);
+        //     }
+        // }
+        // console.log("currqindex", currentQuestionIndex);
+        setUserData({
+            ...userData,
+
+            [currentQuestionIndex]: {
+                question: questions[currentQuestionIndex].question,
+                a: selectedAnswer,
+                isCorrect: isCorrect,
+                correctAnswer: questions[currentQuestionIndex].correctAnswer,
+            },
+        });
+        // setSelectedAnswer("");
+
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
         } else {
@@ -57,9 +78,23 @@ const Trivia = () => {
             });
         }
     };
+    // console.log("userdata", userData);
+
+    // useEffect(() => {
+    //     console.log(userData);
+    // }, [userData]);
+
+    const handlePrevQuestion = () => {
+        if (currentQuestionIndex > 0) {
+            setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
+            setSelectedAnswer(userData[currentQuestionIndex - 1].a);
+        }
+    };
+    // console.log("selected", selectedAnswer);
 
     const restartGame = () => {
         setQuestions([]);
+        setUserData(null);
         setCurrentQuestionIndex(0);
         setUserAnswers([]);
         setScore(0);
@@ -75,7 +110,11 @@ const Trivia = () => {
         );
     }
 
+    // console.log("array:", Object.entries(userData)[0][1]);
+
     if (gameOver) {
+        const reviewData = Object.entries(userData);
+        console.log("array:", Object.entries(userData));
         return (
             <div className="reviewpage">
                 <div className="gameover">
@@ -83,27 +122,23 @@ const Trivia = () => {
                     <p>Your Final Score: {score} out of 6</p>
                     <h3>Questions Review:</h3>
                     <ul className="reviewList">
-                        {questions.map((question, index) => (
+                        {reviewData.map(([index, data]) => (
                             <li key={index} className="review-li">
                                 <p>
-                                    {index + 1} - {question.question}
+                                    {parseInt(index) + 1} - {data.question}
                                 </p>
-                                <p>Correct Answer: {question.correctAnswer}</p>
+                                <p>Correct Answer: {data.correctAnswer}</p>
                                 <p>
                                     Your Answer:{""}
-                                    {userAnswers[index].userAnswer}
+                                    {data.a ? data.a : "Not Selected"}
                                 </p>
                                 <p
                                     className={
-                                        userAnswers[index].isCorrect
-                                            ? "correct"
-                                            : "incorrect"
+                                        data.isCorrect ? "correct" : "incorrect"
                                     }
                                 >
                                     {/* {console.log({ userAnswers })} */}
-                                    {userAnswers[index].isCorrect
-                                        ? "Correct"
-                                        : "Incorrect"}
+                                    {data.isCorrect ? "Correct" : "Incorrect"}
                                 </p>
                             </li>
                         ))}
@@ -142,15 +177,27 @@ const Trivia = () => {
                 </ul>
             </div>
             {/* <p>Score: {score}</p> */}
-            <button
-                onClick={handleNextQuestion}
-                className="nextbutton"
-                // disabled={!userAnswers[currentQuestionIndex]}
-            >
-                {currentQuestionIndex === questions.length - 1
-                    ? "Finish Game"
-                    : "Next Question"}
-            </button>
+            <div className="buttonContainer">
+                <button
+                    onClick={handlePrevQuestion}
+                    className={
+                        currentQuestionIndex === 0
+                            ? "prevbutton hide"
+                            : "prevbutton"
+                    }
+                >
+                    Previous Question
+                </button>
+                <button
+                    onClick={handleNextQuestion}
+                    className="nextbutton"
+                    // disabled={!userAnswers[currentQuestionIndex]}
+                >
+                    {currentQuestionIndex === questions.length - 1
+                        ? "Finish Game"
+                        : "Next Question"}
+                </button>
+            </div>
         </div>
     );
 };

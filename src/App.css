@@ -114,8 +114,13 @@ body {
 .review-li {
     margin-top: 1.5rem;
 }
+.buttonContainer {
+    display: flex;
+    gap: 3rem;
+}
 
-.nextbutton {
+.nextbutton,
+.prevbutton {
     height: 2.5rem;
     background-color: white;
     color: #b336e4;
@@ -130,14 +135,17 @@ body {
     margin-bottom: 5rem;
 }
 
-.nextbutton:hover {
+.nextbutton:hover,
+.prevbutton:hover {
     cursor: pointer;
     background: rgb(107, 237, 14);
     color: #b336e4;
 }
 
 .nextbutton::before,
-.nextbutton::after {
+.nextbutton::after,
+.prevbutton::before,
+.prevbutton::after {
     content: "";
     position: absolute;
     inset: -0.5rem;
@@ -151,7 +159,8 @@ body {
     z-index: -1;
 }
 
-.nextbutton::after {
+.nextbutton::after,
+.prevbutton::after {
     filter: blur(3.5rem);
 }
 
@@ -174,4 +183,8 @@ body {
 }
 .incorrect {
     color: red;
+}
+
+.hide {
+    display: none;
 }
