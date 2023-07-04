@@ -88,9 +88,8 @@ const Trivia = () => {
 
     const restartGame = () => {
         setQuestions([]);
-        setUserData(null);
+        setUserData({});
         setCurrentQuestionIndex(0);
-
         setScore(0);
         setGameOver(false);
         fetchData();
